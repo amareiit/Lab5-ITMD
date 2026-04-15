@@ -1,4 +1,3 @@
-const form = document.getElementById("tipForm");
 const billInput = document.getElementById("bill");
 const tipRange = document.getElementById("tipRange");
 const tipDisplay = document.getElementById("tipDisplay");
@@ -7,13 +6,14 @@ const totalTax = document.getElementById("totalTax");
 const totalTip = document.getElementById("totalTip");
 const currency = document.getElementById("currency");
 
-form.addEventListener("input", calculate);
+billInput.addEventListener("input", calculate);
+tipRange.addEventListener("input", calculate);
+currency.addEventListener("change", calculate);
 
 function calculate() {
     let bill = parseFloat(billInput.value);
     let tip = parseFloat(tipRange.value);
 
-    // Update slider display
     tipDisplay.textContent = tip + "%";
 
     // Validation
@@ -30,8 +30,9 @@ function calculate() {
     // Calculations
     let tipAmt = (bill * tip) / 100;
     let tax = bill * 0.11;
+
     let totalWithTax = bill + tax;
-    let totalWithTaxAndTip = bill + tax + tipAmt;
+    let totalWithTipAndTax = bill + tax + tipAmt;
 
     // Currency conversion
     let rate = 1;
@@ -41,7 +42,7 @@ function calculate() {
     // Output
     tipAmount.value = (tipAmt * rate).toFixed(2);
     totalTax.value = (totalWithTax * rate).toFixed(2);
-    totalTip.value = (totalWithTaxAndTip * rate).toFixed(2);
+    totalTip.value = (totalWithTipAndTax * rate).toFixed(2);
 }
 
 function resetFields() {
