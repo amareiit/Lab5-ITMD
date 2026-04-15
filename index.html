@@ -1,4 +1,3 @@
-<!-- Amare Beacham // ITMD -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,32 +12,36 @@
 
 <form id="tipForm">
 
-    <label for="bill">Bill Total</label>
+    <p>Currency conversion:</p>
+    <p>$1 USD = €0.95 EUR for Euros</p>
+    <p>$1 USD = ₹85 INR for Rupees</p>
+
+    <label for="bill">Bill Total: $</label>
     <input type="text" id="bill" placeholder="Enter amount">
 
-    <label for="tipRange">Tip Percentage</label>
-    <input type="range" id="tipRange" min="0" max="100" value="15">
-
-    <label for="tipPercent">Tip Percentage</label>
-    <input type="text" id="tipPercent" disabled>
-
-    <label for="tipAmount">Tip Amount</label>
-    <input type="text" id="tipAmount" disabled>
-
-    <label for="totalTax">Total with Tax</label>
+    <label>Total Bill with Tax (11%):</label>
     <input type="text" id="totalTax" disabled>
 
-    <label for="totalTip">Total with Tip</label>
-    <input type="text" id="totalTip" disabled>
-
-    <!-- Shows Currency -->
-    <label for="currency">Currency</label>
+    <label for="currency">Select Currency:</label>
     <select id="currency">
         <option value="inr">Indian Rupee</option>
         <option value="eur">Euro</option>
     </select>
 
+    <label for="tipRange">Tip</label>
+    <div class="slider-container">
+        <input type="range" id="tipRange" min="0" max="100" value="0">
+        <span id="tipDisplay">0%</span>
+    </div>
+
+    <label>Converted Tip Amount:</label>
+    <input type="text" id="tipAmount" disabled>
+
+    <label>Converted Total Bill with Tip and Tax:</label>
+    <input type="text" id="totalTip" disabled>
+
 </form>
 
+<script src="script.js"></script>
 </body>
 </html>
