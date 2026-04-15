@@ -1,49 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tip Calculator</title>
-	<link rel="stylesheet" href="styles.css">
-</head>
-<body>
+const form = document.getElementById("tipForm");
+const billInput = document.getElementById("bill");
+const tipRange = document.getElementById("tipRange");
+const tipPercent = document.getElementById("tipPercent");
+const tipAmount = document.getElementById("tipAmount");
+const totalTax = document.getElementById("totalTax");
+const totalTip = document.getElementById("totalTip");
+const currency = document.getElementById("currency");
 
-<h1>Tip Calculator</h1>
+form.addEventListener("input", calculate);
 
-<form>
+function calculate() {
+    let bill = parseFloat(billInput.value);
+    let tip = parseFloat(tipRange.value);
 
-    // Total of the Bill
-    <label for="bill">Bill Total</label>
-    <input type="text" id="bill">
+    // Validation
+    if (isNaN(bill) || bill < 0) {
+        resetFields();
+        return;
+    }
 
-    // Slider
-    <label for="tipRange">Tip Percentage</label>
-    <input type="range" id="tipRange" min="0" max="100">
+    if (bill === 0) {
+        resetFields();
+        return;
+    }
 
-    // Shows Tip Percentage
-    <label for="tipPercent">Tip Percentage</label>
-    <input type="text" id="tipPercent" disabled>
+    // Calculations
+    let tipAmt = (bill * tip) / 100;
+    let tax = bill * 0.11;
+    let totalWithTax = bill + tax;
+    let totalWithTip = bill + tipAmt;
 
-    // Tip Total
-    <label for="tipAmount">Tip Amount</label>
-    <input type="text" id="tipAmount" disabled>
+    // Currency conversion
+    let rate = 1;
+    if (currency.value === "inr") rate = 83;
+    if (currency.value === "eur") rate = 0.92;
 
-    // Tip Total including Tax
-    <label for="totalTax">Total with Tax</label>
-    <input type="text" id="totalTax" disabled>
+    tipPercent.value = tip + "%";
+    tipAmount.value = (tipAmt * rate).toFixed(2);
+    totalTax.value = (totalWithTax * rate).toFixed(2);
+    totalTip.value = (totalWithTip * rate).toFixed(2);
+}
 
-    // Tip Total including Tip
-    <label for="totalTip">Total with Tip</label>
-    <input type="text" id="totalTip" disabled>
-
-    // Shows Currency
-    <label for="currency">Currency</label>
-    <select id="currency">
-        <option value="inr">Indian Rupee</option>
-        <option value="eur">Euro</option>
-    </select>
-
-</form>
-
-</body>
-</html>
+function resetFields() {
+    tipPercent.value = "";
+    tipAmount.value = "";
+    totalTax.value = "";
+    totalTip.value = "";
+}
