@@ -27,14 +27,12 @@ function calculate() {
         return;
     }
 
-    // Calculations
     let tipAmt = (bill * tip) / 100;
     let tax = bill * 0.11;
 
     let totalWithTax = bill + tax;
     let totalWithTipAndTax = bill + tax + tipAmt;
 
-    // Currency conversion
     let rate = 1;
     if (currency.value === "inr") rate = 85;
     if (currency.value === "eur") rate = 0.95;
